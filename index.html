@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KOSMOS · Recuperação de Mix</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0D1117;--sf:#161B22;--bd:#21262D;--t1:#E6EDF3;--t2:#8B949E;--t3:#484F58}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--sf);border-bottom:1px solid var(--bd);flex-wrap:wrap;gap:10px}
+.hl{display:flex;align-items:center;gap:12px}
+.logo{background:linear-gradient(135deg,#6D28D9,#1D4ED8);border-radius:8px;padding:7px 11px;font-size:11px;font-weight:800;letter-spacing:1.5px;color:#fff;text-transform:uppercase;white-space:nowrap}
+.hdr h1{font-size:15px;font-weight:700;letter-spacing:-.3px}
+.hdr .sub{font-size:11px;color:var(--t2);margin-top:2px}
+.hr{display:flex;gap:6px;align-items:center}
+.bdg{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;white-space:nowrap}
+.bdg.p{background:rgba(109,40,217,.18);color:#C4B5FD;border:1px solid rgba(109,40,217,.4)}
+.bdg.b{background:rgba(29,78,216,.18);color:#93C5FD;border:1px solid rgba(29,78,216,.4)}
+.bdg.g{background:rgba(22,101,52,.18);color:#86EFAC;border:1px solid rgba(22,101,52,.4)}
+.tabs{display:flex;background:var(--sf);border-bottom:1px solid var(--bd);padding:0 20px}
+.tab{padding:11px 18px;font-size:13px;font-weight:500;color:var(--t2);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;font-family:inherit}
+.tab.on{color:#60A5FA;border-bottom-color:#3B82F6}
+.tab:hover:not(.on){color:var(--t1)}
+.pane{display:none}
+.pane.on{display:block}
+.dscroll{overflow-x:auto;background:var(--bg);padding:16px 20px}
+#svgd{display:block;width:1920px;height:auto}
+.leg{display:flex;flex-wrap:wrap;gap:10px 20px;padding:10px 20px;background:var(--sf);border-top:1px solid var(--bd)}
+.li{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--t2)}
+.ll{width:22px;height:2px;border-radius:1px}
+.ld{width:22px;height:0;border-top:2px dashed}
+.lr{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+.dw{max-width:1060px;margin:0 auto;padding:32px 24px 48px}
+.dw h2{font-size:19px;font-weight:700;letter-spacing:-.4px;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--bd)}
+.sec{margin-bottom:28px}
+.sec h3{font-size:13.5px;font-weight:700;margin-bottom:10px}
+.sec p,.sec li{font-size:13px;color:var(--t2);line-height:1.75;margin-bottom:4px}
+.sec ul{padding-left:20px}
+.sec strong{color:var(--t1)}
+.st{width:100%;border-collapse:collapse;font-size:12px;margin-top:12px}
+.st th{padding:8px 12px;text-align:left;background:var(--sf);border:1px solid var(--bd);color:var(--t2);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.st td{padding:8px 12px;border:1px solid var(--bd);vertical-align:top;color:var(--t1);line-height:1.6}
+.st tr:hover td{background:rgba(255,255,255,.025)}
+.tt{position:fixed;pointer-events:none;background:rgba(22,27,34,.97);border:1px solid #30363D;border-radius:8px;padding:10px 14px;max-width:290px;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,.6);opacity:0;transition:opacity .1s}
+.tt.show{opacity:1}
+.tt-t{font-size:12px;font-weight:700;color:var(--t1);margin-bottom:5px}
+.tt-b{font-size:11px;color:var(--t2);line-height:1.5;white-space:pre-line}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hl">
+    <div class="logo">KOSMOS</div>
+    <div>
+      <h1>Sales Intelligence · Automação: Recuperação de Mix</h1>
+      <p class="sub">Fluxo ponta a ponta — MVP · 5 Camadas · Pronto para validação com o cliente</p>
+    </div>
+  </div>
+  <div class="hr">
+    <span class="bdg p">Fase 2 MVP</span>
+    <span class="bdg b">Swim Lanes</span>
+    <span class="bdg g">Validação UX</span>
+  </div>
+</div>
+
+<nav class="tabs">
+  <button class="tab on" onclick="sw('diagram',this)">📊 Diagrama Visual</button>
+  <button class="tab" onclick="sw('desc',this)">📄 Descrição Detalhada</button>
+</nav>
+
+<!-- DIAGRAM TAB -->
+<section class="pane on" id="pane-diagram">
+<div class="dscroll">
+<svg id="svgd" viewBox="0 0 1920 1120" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="ab" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><path d="M0,0 L9,3.5 L0,7 Z" fill="#3B82F6"/></marker>
+  <marker id="ag" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><path d="M0,0 L9,3.5 L0,7 Z" fill="#22C55E"/></marker>
+  <marker id="ar" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><path d="M0,0 L9,3.5 L0,7 Z" fill="#EF4444"/></marker>
+  <marker id="ao" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><path d="M0,0 L9,3.5 L0,7 Z" fill="#F59E0B"/></marker>
+  <marker id="ac" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><path d="M0,0 L9,3.5 L0,7 Z" fill="#06B6D4"/></marker>
+  <marker id="am" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><path d="M0,0 L9,3.5 L0,7 Z" fill="#6B7280"/></marker>
+  <marker id="ap" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><path d="M0,0 L9,3.5 L0,7 Z" fill="#A78BFA"/></marker>
+  <marker id="apr" markerWidth="9" markerHeight="7" refX="1" refY="3.5" orient="auto"><path d="M9,0 L0,3.5 L9,7 Z" fill="#A78BFA"/></marker>
+  <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+    <circle cx="12" cy="12" r="1" fill="#1E293B"/>
+  </pattern>
+</defs>
+
+<!-- BG -->
+<rect width="1920" height="1120" fill="#0D1117"/>
+<rect width="1920" height="1120" fill="url(#dots)" opacity="0.5"/>
+
+<!-- Lane backgrounds -->
+<rect x="0" y="25" width="1920" height="200" fill="#0E0A1C"/>
+<rect x="0" y="225" width="1920" height="150" fill="#071820"/>
+<rect x="0" y="375" width="1920" height="200" fill="#08101E"/>
+<rect x="0" y="575" width="1920" height="320" fill="#081210"/>
+<rect x="0" y="895" width="1920" height="210" fill="#0A0A18"/>
+
+<!-- Lane separators -->
+<line x1="0" y1="225" x2="1920" y2="225" stroke="#21262D" stroke-width="1.5"/>
+<line x1="0" y1="375" x2="1920" y2="375" stroke="#21262D" stroke-width="1.5"/>
+<line x1="0" y1="575" x2="1920" y2="575" stroke="#21262D" stroke-width="1.5"/>
+<line x1="0" y1="895" x2="1920" y2="895" stroke="#21262D" stroke-width="1.5"/>
+<line x1="0" y1="1105" x2="1920" y2="1105" stroke="#21262D" stroke-width="1"/>
+
+<!-- Label column -->
+<rect x="0" y="25" width="172" height="1080" fill="rgba(0,0,0,.22)"/>
+<line x1="172" y1="25" x2="172" y2="1105" stroke="#21262D" stroke-width="1.5"/>
+<rect x="0" y="25"  width="172" height="200" fill="rgba(109,40,217,.07)"/>
+<rect x="0" y="225" width="172" height="150" fill="rgba(8,145,178,.07)"/>
+<rect x="0" y="375" width="172" height="200" fill="rgba(37,99,235,.07)"/>
+<rect x="0" y="575" width="172" height="320" fill="rgba(22,163,74,.07)"/>
+<rect x="0" y="895" width="172" height="210" fill="rgba(109,40,217,.07)"/>
+
+<!-- Lane labels -->
+<text transform="rotate(-90 86 125)" x="86" y="130" text-anchor="middle" fill="#8B5CF6" font-size="10" font-weight="700" letter-spacing="1.3" font-family="Inter,system-ui">C1 · MOTOR DE INTELIGÊNCIA</text>
+<text transform="rotate(-90 86 300)" x="86" y="305" text-anchor="middle" fill="#06B6D4" font-size="10" font-weight="700" letter-spacing="1.3" font-family="Inter,system-ui">C2 · NOTIFICAÇÃO EXTERNA</text>
+<text transform="rotate(-90 86 475)" x="86" y="480" text-anchor="middle" fill="#3B82F6" font-size="10" font-weight="700" letter-spacing="1.3" font-family="Inter,system-ui">C3 · CAIXA DE ENTRADA</text>
+<text transform="rotate(-90 86 735)" x="86" y="740" text-anchor="middle" fill="#22C55E" font-size="10" font-weight="700" letter-spacing="1.3" font-family="Inter,system-ui">C4 · FUNIL DO REPRESENTANTE</text>
+<text transform="rotate(-90 86 1000)" x="86" y="1005" text-anchor="middle" fill="#A78BFA" font-size="10" font-weight="700" letter-spacing="1.3" font-family="Inter,system-ui">C5 · PASTA DO CLIENTE</text>
+
+<!-- ============ ARROWS ============ -->
+
+<!-- A1: DB → AN -->
+<path d="M372,125 L414,125" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)"/>
+<!-- A2: AN → T1 (fork up) -->
+<path d="M600,125 L620,125 L620,88 L648,88" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)"/>
+<!-- A3: AN → T2 (fork down) -->
+<path d="M600,125 L620,125 L620,163 L644,163" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)"/>
+<!-- A4: T1 → DM (bezier merge) -->
+<path d="M808,88 C840,88 840,125 870,125" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)"/>
+<!-- A5: T2 → DM (bezier merge) -->
+<path d="M812,163 C840,163 840,125 870,125" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)"/>
+<!-- A6: DM → EX -->
+<path d="M1045,125 L1123,125" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)"/>
+<!-- A7: EX → GEN "Sim" (down into Lane 2) -->
+<path d="M1188,163 L1188,272" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)"/>
+<text x="1197" y="219" fill="#22C55E" font-size="10" font-style="italic" font-family="Inter,system-ui">Sim</text>
+<!-- A8: EX → END "Não" (right, dashed) -->
+<path d="M1253,125 L1306,125 L1306,172" stroke="#6B7280" stroke-width="1.5" fill="none" marker-end="url(#am)" stroke-dasharray="5,3"/>
+<text x="1258" y="119" fill="#EF4444" font-size="10" font-style="italic" font-family="Inter,system-ui">Não</text>
+<!-- A9: GEN → WA (bezier) -->
+<path d="M1103,300 C1068,300 1068,266 1035,266" stroke="#06B6D4" stroke-width="1.8" fill="none" marker-end="url(#ac)"/>
+<!-- A10: GEN → EM (bezier) -->
+<path d="M1103,300 C1068,300 1068,336 1035,336" stroke="#06B6D4" stroke-width="1.8" fill="none" marker-end="url(#ac)"/>
+<!-- A11+A12: feeders to merge point -->
+<path d="M850,266 L782,266 L782,295" stroke="#06B6D4" stroke-width="1.5" fill="none" opacity="0.5"/>
+<path d="M850,336 L782,336 L782,306" stroke="#06B6D4" stroke-width="1.5" fill="none" opacity="0.5"/>
+<circle cx="782" cy="300" r="5" fill="#06B6D4" stroke="#164E63" stroke-width="1.5"/>
+<!-- A13: merge → LG (dashed, rep's manual action) -->
+<path d="M782,305 L782,375 L387,375 L387,447" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)" stroke-dasharray="6,3"/>
+<text x="562" y="368" fill="#93C5FD" font-size="10" font-style="italic" text-anchor="middle" font-family="Inter,system-ui">Acessa KOSMOS via link</text>
+<!-- A14: LG → IN -->
+<path d="M472,475 L542,475" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)"/>
+<!-- A15: IN → SEL -->
+<path d="M712,475 L812,475" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)"/>
+<!-- A16: SEL → SY "Sim" -->
+<path d="M932,475 L968,475 L968,445 L1005,445" stroke="#22C55E" stroke-width="1.8" fill="none" marker-end="url(#ag)"/>
+<text x="948" y="458" fill="#22C55E" font-size="10" font-style="italic" font-family="Inter,system-ui">Sim</text>
+<!-- A17: SEL → SN "Não" -->
+<path d="M872,508 L872,525 L1157,525" stroke="#EF4444" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+<text x="880" y="521" fill="#EF4444" font-size="10" font-style="italic" font-family="Inter,system-ui">Não</text>
+<!-- A18: SN loop → IN (red dashed) -->
+<path d="M1347,525 L1510,525 L1510,568 L627,568 L627,503" stroke="#EF4444" stroke-width="1.5" fill="none" marker-end="url(#ar)" stroke-dasharray="6,3"/>
+<text x="1065" y="562" fill="#EF4444" font-size="10" font-style="italic" text-anchor="middle" font-family="Inter,system-ui">Mantém como pendente (vermelho)</text>
+<!-- A19: SY → E1 (green) -->
+<path d="M1098,471 L1098,580 L742,580 L742,626" stroke="#22C55E" stroke-width="2" fill="none" marker-end="url(#ag)"/>
+<text x="920" y="575" fill="#22C55E" font-size="10" font-style="italic" text-anchor="middle" font-family="Inter,system-ui">Iniciar tratativa →</text>
+<!-- A20: E1 → PCnote (purple dashed) -->
+<path d="M737,704 L737,756" stroke="#A78BFA" stroke-width="1.5" fill="none" marker-end="url(#ap)" stroke-dasharray="4,3"/>
+<!-- A21: E1 → E2 -->
+<path d="M842,665 L992,665" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)"/>
+<!-- A22: E2 → PRZnote (orange dashed) -->
+<path d="M1092,704 L1092,754" stroke="#F59E0B" stroke-width="1.5" fill="none" marker-end="url(#ao)" stroke-dasharray="4,3"/>
+<!-- A23: E2 → E3 -->
+<path d="M1192,665 L1352,665" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)"/>
+<!-- A24: E3 → WIN "Ganhou" -->
+<path d="M1542,665 L1562,665 L1562,627 L1582,627" stroke="#22C55E" stroke-width="1.8" fill="none" marker-end="url(#ag)"/>
+<text x="1545" y="643" fill="#22C55E" font-size="10" font-style="italic" font-family="Inter,system-ui">Ganhou</text>
+<!-- A25: E3 → LST "Perdeu" -->
+<path d="M1542,665 L1562,665 L1562,715 L1582,715" stroke="#EF4444" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+<text x="1545" y="697" fill="#EF4444" font-size="10" font-style="italic" font-family="Inter,system-ui">Perdeu</text>
+<!-- A26: LST → LSTmot (small dashed) -->
+<path d="M1672,741 L1672,770" stroke="#EF4444" stroke-width="1.2" fill="none" stroke-dasharray="3,2" marker-end="url(#ar)"/>
+<!-- A27: LST → RGD (orange dashed) -->
+<path d="M1672,741 L1672,825 L1542,825" stroke="#F59E0B" stroke-width="1.5" fill="none" marker-end="url(#ao)" stroke-dasharray="6,3"/>
+<text x="1602" y="817" fill="#F59E0B" font-size="10" font-style="italic" text-anchor="middle" font-family="Inter,system-ui">Reagendar</text>
+<!-- A28: WIN → CV (green, right margin) -->
+<path d="M1762,627 L1766,627 L1766,890 L1242,890 L1242,962" stroke="#22C55E" stroke-width="1.8" fill="none" marker-end="url(#ag)"/>
+<!-- A29: LST → MP (red, far right margin) -->
+<path d="M1762,715 L1776,715 L1776,898 L972,898 L972,962" stroke="#EF4444" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+<!-- A30: RGD → IN (large loop, orange dashed) -->
+<path d="M1542,825 L1870,825 L1870,467 L712,467" stroke="#F59E0B" stroke-width="1.8" fill="none" marker-end="url(#ao)" stroke-dasharray="8,4"/>
+<text x="1706" y="819" fill="#F59E0B" font-size="10" font-style="italic" text-anchor="middle" font-family="Inter,system-ui">🔄 Nova pendência futura</text>
+<!-- A31: E1 ↔ PC (purple dashed, bidirectional) -->
+<path d="M742,704 L742,826 L432,826 L432,956" stroke="#A78BFA" stroke-width="1.5" fill="none" marker-end="url(#ap)" marker-start="url(#apr)" stroke-dasharray="5,3"/>
+<!-- Lane 5 flow -->
+<path d="M517,1000 L597,1000" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)"/>
+<path d="M767,1000 L887,1000" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)"/>
+<path d="M1057,1000 L1157,1000" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)"/>
+<path d="M1327,1000 L1447,1000" stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#ab)"/>
+
+<!-- ============ NODES ============ -->
+
+<!-- === LANE 1 — MOTOR === -->
+
+<!-- N1_DB: Base Histórica -->
+<g class="node" data-tt-t="🗄 Base Histórica 2020-2026" data-tt-b="Histórico completo de vendas por CNPJ.&#10;Linhas monitoradas: MOLAS, ARTEFATOS,&#10;FUNDIDOS e GRAMPOS.&#10;HELICOIDAL totalmente excluída.">
+  <rect x="222" y="93" width="150" height="65" rx="8" fill="#1A0D2E" stroke="#7C3AED" stroke-width="1.5"/>
+  <line x1="222" y1="110" x2="372" y2="110" stroke="#7C3AED" stroke-width="1" opacity="0.4"/>
+  <text x="297" y="124" text-anchor="middle" fill="#E9D5FF" font-size="11.5" font-weight="700" font-family="Inter,system-ui">🗄 Base Histórica</text>
+  <text x="297" y="140" text-anchor="middle" fill="#C4B5FD" font-size="10" font-family="Inter,system-ui">2020 – 2026</text>
+  <text x="297" y="154" text-anchor="middle" fill="#8B5CF6" font-size="10" font-family="Inter,system-ui">Análise por CNPJ</text>
+</g>
+
+<!-- N1_AN: Motor de Análise -->
+<g class="node" data-tt-t="Motor de Análise Trimestral" data-tt-b="Agrupa vendas por CNPJ e trimestre.&#10;Compara ano atual vs 2+ anos anteriores.&#10;Linhas: MOLAS · ARTEFATOS · FUNDIDOS · GRAMPOS">
+  <rect x="414" y="94" width="186" height="62" rx="8" fill="#1A0D2E" stroke="#7C3AED" stroke-width="1.5"/>
+  <text x="507" y="118" text-anchor="middle" fill="#E9D5FF" font-size="11.5" font-weight="700" font-family="Inter,system-ui">Motor de Análise</text>
+  <text x="507" y="133" text-anchor="middle" fill="#C4B5FD" font-size="10" font-family="Inter,system-ui">Trimestral por Linha</text>
+  <text x="507" y="148" text-anchor="middle" fill="#8B5CF6" font-size="9.5" font-family="Inter,system-ui">MOLAS · ARTEFATOS · FUNDIDOS · GRAMPOS</text>
+</g>
+
+<!-- N1_T1: Gatilho Ruptura -->
+<g class="node" data-tt-t="Gatilho 1: Ruptura / Queda de Mix" data-tt-b="Clientes que compravam uma linha de forma recorrente&#10;e pararam ou reduziram drasticamente as compras&#10;a partir de um mês específico.">
+  <rect x="648" y="65" width="160" height="46" rx="7" fill="#1A0D2E" stroke="#7C3AED" stroke-width="1.5"/>
+  <text x="728" y="83" text-anchor="middle" fill="#C4B5FD" font-size="10.5" font-weight="700" font-family="Inter,system-ui">① Ruptura / Queda</text>
+  <text x="728" y="98" text-anchor="middle" fill="#8B5CF6" font-size="10" font-family="Inter,system-ui">Cliente parou ou caiu</text>
+</g>
+
+<!-- N1_T2: Gatilho Oportunidade -->
+<g class="node" data-tt-t="Gatilho 2: Oportunidade de Mix" data-tt-b="Clientes ativos que compram apenas MOLAS&#10;mas nunca compraram ARTEFATOS, FUNDIDOS ou GRAMPOS.&#10;Potencial de cross-sell identificado.">
+  <rect x="644" y="140" width="168" height="46" rx="7" fill="#1A0D2E" stroke="#7C3AED" stroke-width="1.5"/>
+  <text x="728" y="157" text-anchor="middle" fill="#C4B5FD" font-size="10.5" font-weight="700" font-family="Inter,system-ui">② Oportunidade de Mix</text>
+  <text x="728" y="172" text-anchor="middle" fill="#8B5CF6" font-size="10" font-family="Inter,system-ui">Nunca comprou Mix</text>
+</g>
+
+<!-- N1_DM: Dinheiro na Mesa -->
+<g class="node" data-tt-t="💰 Dinheiro na Mesa" data-tt-b="Soma em R$ que os clientes sinalizados&#10;compravam no período anterior.&#10;Exibido como gatilho de urgência.&#10;Ex: 'R$ 48.000 em potencial na mesa'">
+  <rect x="870" y="93" width="175" height="65" rx="8" fill="#1C0E04" stroke="#D97706" stroke-width="2"/>
+  <rect x="870" y="93" width="175" height="22" rx="8" fill="#D97706" opacity="0.14"/>
+  <text x="957" y="110" text-anchor="middle" fill="#FCD34D" font-size="12" font-weight="800" font-family="Inter,system-ui">💰 Dinheiro na Mesa</text>
+  <text x="957" y="129" text-anchor="middle" fill="#FDE68A" font-size="11" font-weight="600" font-family="Inter,system-ui">Σ R$ em potencial</text>
+  <text x="957" y="149" text-anchor="middle" fill="#F59E0B" font-size="10" font-family="Inter,system-ui">(gatilho de urgência)</text>
+</g>
+
+<!-- N1_EX: Diamond "Clientes sinalizados?" -->
+<g class="node" data-tt-t="Há clientes sinalizados?" data-tt-b="Se Sim: dispara alerta automático (Camada 2).&#10;Se Não: aguarda próximo ciclo trimestral.">
+  <polygon points="1188,89 1253,125 1188,161 1123,125" fill="#0D1D3A" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="1188" y="121" text-anchor="middle" fill="#93C5FD" font-size="11" font-weight="700" font-family="Inter,system-ui">Clientes</text>
+  <text x="1188" y="137" text-anchor="middle" fill="#93C5FD" font-size="11" font-weight="700" font-family="Inter,system-ui">sinalizados?</text>
+</g>
+
+<!-- N1_END: Aguarda ciclo -->
+<g class="node" data-tt-t="Aguarda próximo ciclo" data-tt-b="Sem clientes para alertar neste período.&#10;O motor aguarda o próximo ciclo trimestral.">
+  <rect x="1306" y="149" width="165" height="46" rx="7" fill="#111827" stroke="#374151" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <text x="1388" y="167" text-anchor="middle" fill="#9CA3AF" font-size="10.5" font-weight="600" font-family="Inter,system-ui">Sem alertas</text>
+  <text x="1388" y="183" text-anchor="middle" fill="#6B7280" font-size="10" font-family="Inter,system-ui">↻ Aguarda próximo ciclo</text>
+</g>
+
+<!-- === LANE 2 — NOTIFICAÇÃO === -->
+
+<!-- N2_GEN: Gera Alerta -->
+<g class="node" data-tt-t="Gera Alerta Automático" data-tt-b="Sistema gera alerta com:&#10;• Nº clientes com ruptura/queda&#10;• Nº oportunidades de cross-sell&#10;• Total R$ (Dinheiro na Mesa)&#10;• Link direto para o KOSMOS">
+  <rect x="1103" y="272" width="170" height="56" rx="8" fill="#071820" stroke="#0891B2" stroke-width="1.5"/>
+  <text x="1188" y="294" text-anchor="middle" fill="#E0F2FE" font-size="11.5" font-weight="700" font-family="Inter,system-ui">Gera Alerta</text>
+  <text x="1188" y="311" text-anchor="middle" fill="#7DD3FC" font-size="10" font-family="Inter,system-ui">Automático</text>
+</g>
+
+<!-- N2_WA: WhatsApp -->
+<g class="node" data-tt-t="Notificação WhatsApp" data-tt-b="Resumo quantitativo + Link KOSMOS.&#10;'Você tem X clientes com queda — R$ XXX mil'&#10;⚠ Papel informativo: rep NÃO responde aqui.">
+  <rect x="850" y="241" width="185" height="50" rx="8" fill="#071820" stroke="#0891B2" stroke-width="1.5"/>
+  <text x="942" y="260" text-anchor="middle" fill="#E0F2FE" font-size="11.5" font-weight="700" font-family="Inter,system-ui">📱 WhatsApp</text>
+  <text x="942" y="277" text-anchor="middle" fill="#67E8F9" font-size="10" font-family="Inter,system-ui">Resumo quantitativo + Link KOSMOS</text>
+</g>
+
+<!-- N2_EM: E-mail -->
+<g class="node" data-tt-t="Notificação E-mail" data-tt-b="Mesmo resumo do WhatsApp por e-mail.&#10;⚠ Papel informativo: rep NÃO responde aqui.">
+  <rect x="850" y="311" width="185" height="50" rx="8" fill="#071820" stroke="#0891B2" stroke-width="1.5"/>
+  <text x="942" y="330" text-anchor="middle" fill="#E0F2FE" font-size="11.5" font-weight="700" font-family="Inter,system-ui">📧 E-mail</text>
+  <text x="942" y="347" text-anchor="middle" fill="#67E8F9" font-size="10" font-family="Inter,system-ui">Resumo quantitativo + Link KOSMOS</text>
+</g>
+
+<!-- N2_NOTE: Callout warning -->
+<g data-tt-t="⚠ Canais Apenas Informativos" data-tt-b="WhatsApp e E-mail são estritamente informativos.&#10;Representante NÃO trata, NÃO responde e&#10;NÃO negocia nesses canais.&#10;São somente alertas de acesso ao KOSMOS.">
+  <rect x="510" y="262" width="215" height="78" rx="8" fill="rgba(0,0,0,.3)" stroke="#374151" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="617" y="282" text-anchor="middle" fill="#FCD34D" font-size="11" font-weight="700" font-family="Inter,system-ui">⚠ Papel apenas informativo</text>
+  <text x="617" y="299" text-anchor="middle" fill="#9CA3AF" font-size="10.5" font-family="Inter,system-ui">Rep NÃO responde nem trata aqui</text>
+  <text x="617" y="316" text-anchor="middle" fill="#9CA3AF" font-size="10.5" font-family="Inter,system-ui">Tratativa apenas no KOSMOS</text>
+  <text x="617" y="332" text-anchor="middle" fill="#6B7280" font-size="10" font-style="italic" font-family="Inter,system-ui">(somente KOSMOS)</text>
+</g>
+
+<!-- === LANE 3 — INBOX === -->
+
+<!-- N3_LG: Login KOSMOS -->
+<g class="node" data-tt-t="Login KOSMOS" data-tt-b="Tela filtrada apenas para a carteira do representante.&#10;Suporta múltiplos acessos por representação.&#10;Acesso via link ou diretamente.">
+  <rect x="302" y="447" width="170" height="56" rx="8" fill="#0D1D3A" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="387" y="469" text-anchor="middle" fill="#E0F2FE" font-size="11.5" font-weight="700" font-family="Inter,system-ui">Login KOSMOS</text>
+  <text x="387" y="486" text-anchor="middle" fill="#93C5FD" font-size="10" font-family="Inter,system-ui">Tela do Representante</text>
+</g>
+
+<!-- N3_IN: Caixa de Entrada -->
+<g class="node" data-tt-t="Caixa de Entrada (Inbox)" data-tt-b="Lista de todos os clientes sinalizados.&#10;Ordenada por urgência (Dinheiro na Mesa).&#10;Clientes pendentes aparecem em vermelho.&#10;Ex: 20 clientes sinalizados.">
+  <rect x="542" y="447" width="170" height="56" rx="8" fill="#0D1D3A" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="627" y="469" text-anchor="middle" fill="#E0F2FE" font-size="11.5" font-weight="700" font-family="Inter,system-ui">Caixa de Entrada</text>
+  <text x="627" y="486" text-anchor="middle" fill="#93C5FD" font-size="10" font-family="Inter,system-ui">Clientes sinalizados</text>
+</g>
+
+<!-- N3_SEL: Diamond "Seleciona?" -->
+<g class="node" data-tt-t="Seleciona clientes?" data-tt-b="Rep seleciona quais clientes vai trabalhar AGORA.&#10;Seleção por lote (ex: 10 de 20).&#10;Não selecionados ficam como Ações Pendentes em 🔴.">
+  <polygon points="872,442 932,475 872,508 812,475" fill="#0D1D3A" stroke="#2563EB" stroke-width="1.5"/>
+  <text x="872" y="471" text-anchor="middle" fill="#93C5FD" font-size="11" font-weight="700" font-family="Inter,system-ui">Seleciona</text>
+  <text x="872" y="486" text-anchor="middle" fill="#93C5FD" font-size="11" font-weight="700" font-family="Inter,system-ui">clientes?</text>
+</g>
+
+<!-- N3_SY: Clientes Selecionados (green) -->
+<g class="node" data-tt-t="Clientes Selecionados" data-tt-b="Clientes que o representante escolheu trabalhar agora.&#10;Entram no Funil de Tratativa (Etapa 1).&#10;Ex: 10 de 20 selecionados.">
+  <rect x="1005" y="419" width="185" height="52" rx="8" fill="#0A1F14" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="1098" y="440" text-anchor="middle" fill="#D1FAE5" font-size="11.5" font-weight="700" font-family="Inter,system-ui">Clientes Selecionados</text>
+  <text x="1098" y="457" text-anchor="middle" fill="#86EFAC" font-size="10" font-family="Inter,system-ui">(ex: 10 de 20)</text>
+</g>
+
+<!-- N3_SN: Ações Pendentes (red) -->
+<g class="node" data-tt-t="⏰ Ações Pendentes em VERMELHO" data-tt-b="Clientes NÃO selecionados continuam na Inbox.&#10;Destacados em vermelho como Ações Pendentes.&#10;Geram lembretes futuros até serem tratados.&#10;Não desaparecem automaticamente.">
+  <rect x="1157" y="499" width="190" height="52" rx="8" fill="#1F0D0D" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="1252" y="520" text-anchor="middle" fill="#FEE2E2" font-size="11.5" font-weight="700" font-family="Inter,system-ui">⏰ Ações Pendentes</text>
+  <text x="1252" y="537" text-anchor="middle" fill="#FCA5A5" font-size="10" font-family="Inter,system-ui">Destaque VERMELHO na Inbox</text>
+</g>
+
+<!-- === LANE 4 — FUNIL === -->
+
+<!-- N4_E1: Etapa 1 -->
+<g class="node" data-tt-t="ETAPA 1: Prospecção / Contato ou Visita" data-tt-b="Sistema entrega diagnóstico pronto:&#10;• Quais linhas caíram e em qual mês&#10;• Histórico 2020-2026 por linha&#10;Rep registra: contato feito, notas iniciais.&#10;Acesso à Pasta do Cliente (tablet/notebook).">
+  <rect x="642" y="626" width="200" height="78" rx="8" fill="#1A0D2E" stroke="#7C3AED" stroke-width="2"/>
+  <rect x="642" y="626" width="200" height="26" rx="8" fill="#7C3AED" opacity="0.2"/>
+  <text x="742" y="645" text-anchor="middle" fill="#E9D5FF" font-size="12" font-weight="800" font-family="Inter,system-ui">ETAPA 1</text>
+  <text x="742" y="663" text-anchor="middle" fill="#C4B5FD" font-size="11" font-weight="600" font-family="Inter,system-ui">Prospecção</text>
+  <text x="742" y="678" text-anchor="middle" fill="#A78BFA" font-size="10.5" font-family="Inter,system-ui">Contato / Visita</text>
+  <text x="742" y="695" text-anchor="middle" fill="#7C3AED" font-size="9.5" font-family="Inter,system-ui">Registra contato realizado</text>
+</g>
+
+<!-- N4_PCnote -->
+<g data-tt-t="📁 Pasta do Cliente (apoio em campo)" data-tt-b="Histórico completo de compras 2020-2026,&#10;gráficos por linha, comparativo de períodos.&#10;Otimizada para tablet/notebook em visita presencial.&#10;Leitura + gravação de interações em tempo real.">
+  <rect x="647" y="756" width="190" height="58" rx="7" fill="#0C0A18" stroke="#6D28D9" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="742" y="775" text-anchor="middle" fill="#DDD6FE" font-size="11" font-weight="700" font-family="Inter,system-ui">📁 Pasta do Cliente</text>
+  <text x="742" y="790" text-anchor="middle" fill="#A78BFA" font-size="10" font-family="Inter,system-ui">Diagnóstico pronto</text>
+  <text x="742" y="806" text-anchor="middle" fill="#7C3AED" font-size="9.5" font-family="Inter,system-ui">(tablet ou notebook)</text>
+</g>
+
+<!-- N4_E2: Etapa 2 -->
+<g class="node" data-tt-t="ETAPA 2: Follow-up / Em Tratativa" data-tt-b="Registra próximo passo com prazo:&#10;• Aguardando cotação (30 dias)&#10;• Visita presencial (60 dias)&#10;• Em negociação (preço, frete, prazo)&#10;Sistema monitora o prazo definido (SLA).">
+  <rect x="992" y="626" width="200" height="78" rx="8" fill="#0A1428" stroke="#2563EB" stroke-width="2"/>
+  <rect x="992" y="626" width="200" height="26" rx="8" fill="#2563EB" opacity="0.2"/>
+  <text x="1092" y="645" text-anchor="middle" fill="#EFF6FF" font-size="12" font-weight="800" font-family="Inter,system-ui">ETAPA 2</text>
+  <text x="1092" y="663" text-anchor="middle" fill="#93C5FD" font-size="11" font-weight="600" font-family="Inter,system-ui">Follow-up / Em Tratativa</text>
+  <text x="1092" y="678" text-anchor="middle" fill="#60A5FA" font-size="10.5" font-family="Inter,system-ui">Agenda: cotação, visita,</text>
+  <text x="1092" y="693" text-anchor="middle" fill="#60A5FA" font-size="10.5" font-family="Inter,system-ui">negociação de condições</text>
+</g>
+
+<!-- N4_PRZnote -->
+<g data-tt-t="⏰ Regra de Prazo (SLA)" data-tt-b="Se o prazo definido vencer sem atualização:&#10;→ Card fica em VERMELHO como atraso&#10;→ Ponto negativo no radar do representante&#10;Card permanece em Etapa 2 até ser tratado.">
+  <rect x="985" y="754" width="215" height="65" rx="7" fill="#190E04" stroke="#D97706" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="1092" y="773" text-anchor="middle" fill="#FCD34D" font-size="11" font-weight="700" font-family="Inter,system-ui">⏰ SLA: Prazo venceu?</text>
+  <text x="1092" y="789" text-anchor="middle" fill="#FDE68A" font-size="10.5" font-family="Inter,system-ui">→ Card em 🔴 VERMELHO</text>
+  <text x="1092" y="806" text-anchor="middle" fill="#F59E0B" font-size="10" font-family="Inter,system-ui">(ponto negativo no radar)</text>
+</g>
+
+<!-- N4_E3: Etapa 3 -->
+<g class="node" data-tt-t="ETAPA 3: Conclusão (obrigatória)" data-tt-b="Nenhum card pode ficar aberto indefinidamente.&#10;Todo ciclo precisa de resolução: GANHOU ou PERDEU.&#10;Encerramento obrigatório — sem exceções.">
+  <rect x="1352" y="626" width="190" height="78" rx="8" fill="#0A1210" stroke="#16A34A" stroke-width="2"/>
+  <rect x="1352" y="626" width="190" height="26" rx="8" fill="#16A34A" opacity="0.2"/>
+  <text x="1447" y="645" text-anchor="middle" fill="#D1FAE5" font-size="12" font-weight="800" font-family="Inter,system-ui">ETAPA 3</text>
+  <text x="1447" y="663" text-anchor="middle" fill="#86EFAC" font-size="11" font-weight="600" font-family="Inter,system-ui">Conclusão</text>
+  <text x="1447" y="680" text-anchor="middle" fill="#4ADE80" font-size="10.5" font-family="Inter,system-ui">Ganhou  ou  Perdeu</text>
+  <text x="1447" y="696" text-anchor="middle" fill="#166534" font-size="9.5" font-family="Inter,system-ui">(encerramento obrigatório)</text>
+</g>
+
+<!-- N4_WIN: GANHOU -->
+<g class="node" data-tt-t="✅ GANHOU: Fechamento / Reativação" data-tt-b="Cliente fechou pedido ou reativou linha.&#10;Status positivo gravado no histórico.&#10;Dados salvos na Pasta do Cliente.&#10;Métricas de conversão atualizadas.">
+  <rect x="1582" y="601" width="180" height="52" rx="8" fill="#0A1F14" stroke="#16A34A" stroke-width="2"/>
+  <text x="1672" y="623" text-anchor="middle" fill="#D1FAE5" font-size="12" font-weight="800" font-family="Inter,system-ui">✅ GANHOU</text>
+  <text x="1672" y="641" text-anchor="middle" fill="#86EFAC" font-size="10.5" font-family="Inter,system-ui">Fechamento / Reativação</text>
+</g>
+
+<!-- N4_LST: PERDEU -->
+<g class="node" data-tt-t="❌ PERDEU: Registro de Motivo" data-tt-b="Registro OBRIGATÓRIO de motivo:&#10;• Concorrência / contrato fechado&#10;• Não deu preço (margem inadequada)&#10;• Problema frete / prazo de entrega&#10;• Cliente parou de trabalhar com a linha">
+  <rect x="1582" y="689" width="180" height="52" rx="8" fill="#1F0D0D" stroke="#DC2626" stroke-width="2"/>
+  <text x="1672" y="711" text-anchor="middle" fill="#FEE2E2" font-size="12" font-weight="800" font-family="Inter,system-ui">❌ PERDEU</text>
+  <text x="1672" y="729" text-anchor="middle" fill="#FCA5A5" font-size="10.5" font-family="Inter,system-ui">Registra motivo (obrigatório)</text>
+</g>
+
+<!-- N4_LST_MOT: Motivos note -->
+<g data-tt-t="Motivos de Perda Estruturados" data-tt-b="Dropdown pré-definido (sem campo livre):&#10;• Concorrência / contrato fechado&#10;• Não deu preço / margem&#10;• Problema frete / prazo de entrega&#10;• Cliente parou de trabalhar com a linha">
+  <rect x="1586" y="770" width="175" height="82" rx="7" fill="#120808" stroke="#7F1D1D" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="1673" y="788" text-anchor="middle" fill="#FCA5A5" font-size="10.5" font-weight="700" font-family="Inter,system-ui">Motivos estruturados:</text>
+  <text x="1673" y="803" text-anchor="middle" fill="#EF4444" font-size="10" font-family="Inter,system-ui">• Concorrência</text>
+  <text x="1673" y="817" text-anchor="middle" fill="#EF4444" font-size="10" font-family="Inter,system-ui">• Não deu preço</text>
+  <text x="1673" y="831" text-anchor="middle" fill="#EF4444" font-size="10" font-family="Inter,system-ui">• Frete / Prazo</text>
+  <text x="1673" y="845" text-anchor="middle" fill="#EF4444" font-size="10" font-family="Inter,system-ui">• Parou com linha</text>
+</g>
+
+<!-- N4_RGD: Loop Reagendamento -->
+<g class="node" data-tt-t="🔄 Loop: Nova Pendência Futura" data-tt-b="Cliente não fechou agora, mas há interesse futuro.&#10;Rep conclui o ciclo atual e abre&#10;nova pendência com data definida,&#10;que volta para a Caixa de Entrada.">
+  <rect x="1352" y="799" width="190" height="52" rx="8" fill="#1C0E04" stroke="#D97706" stroke-width="1.5"/>
+  <text x="1447" y="819" text-anchor="middle" fill="#FEF3C7" font-size="11.5" font-weight="700" font-family="Inter,system-ui">🔄 Loop: Nova Pendência</text>
+  <text x="1447" y="836" text-anchor="middle" fill="#FCD34D" font-size="10.5" font-family="Inter,system-ui">Reagendamento futuro</text>
+</g>
+
+<!-- === LANE 5 — PASTA DO CLIENTE === -->
+
+<!-- N5_PC: Pasta do Cliente database -->
+<g class="node" data-tt-t="📁 Pasta do Cliente — Histórico Auditável" data-tt-b="Repositório permanente por CNPJ.&#10;Ignora trocas de representante.&#10;Contém: histórico de compras, interações,&#10;motivos de perda, conversões, agendamentos.&#10;🔒 Acessível por gestão e novos representantes.">
+  <rect x="347" y="956" width="170" height="68" rx="8" fill="#1A0D2E" stroke="#7C3AED" stroke-width="1.5"/>
+  <line x1="347" y1="974" x2="517" y2="974" stroke="#7C3AED" stroke-width="0.8" opacity="0.4"/>
+  <text x="432" y="972" text-anchor="middle" fill="#E9D5FF" font-size="11.5" font-weight="700" font-family="Inter,system-ui">📁 Pasta do Cliente</text>
+  <text x="432" y="988" text-anchor="middle" fill="#C4B5FD" font-size="10" font-family="Inter,system-ui">Histórico Auditável</text>
+  <text x="432" y="1003" text-anchor="middle" fill="#8B5CF6" font-size="10" font-family="Inter,system-ui">(por CNPJ — permanente)</text>
+  <text x="432" y="1017" text-anchor="middle" fill="#6D28D9" font-size="9.5" font-family="Inter,system-ui">🔒 Auditável pela gestão</text>
+</g>
+
+<!-- N5_VI: Interações -->
+<g class="node" data-tt-t="Interações, Visitas e Contatos" data-tt-b="Registros de todas as interações:&#10;• Datas e tipos de contato&#10;• Visitas presenciais&#10;• Notas da negociação&#10;Alimenta análise de frequência de contato.">
+  <rect x="597" y="972" width="170" height="56" rx="8" fill="#0D1D3A" stroke="#2563EB" stroke-width="1.2"/>
+  <text x="682" y="993" text-anchor="middle" fill="#E0F2FE" font-size="11" font-weight="700" font-family="Inter,system-ui">Interações</text>
+  <text x="682" y="1009" text-anchor="middle" fill="#93C5FD" font-size="10" font-family="Inter,system-ui">Visitas & Contatos</text>
+</g>
+
+<!-- N5_MP: Motivos Perda -->
+<g class="node" data-tt-t="Motivos de Perda — Dados Estruturados" data-tt-b="Base estratégica de motivos de perda.&#10;Usada para: análise de concorrência,&#10;ajuste de preços, decisões de frete/prazo,&#10;relatórios gerenciais.">
+  <rect x="887" y="972" width="170" height="56" rx="8" fill="#1F0D0D" stroke="#DC2626" stroke-width="1.2"/>
+  <text x="972" y="993" text-anchor="middle" fill="#FEE2E2" font-size="11" font-weight="700" font-family="Inter,system-ui">Motivos de Perda</text>
+  <text x="972" y="1009" text-anchor="middle" fill="#FCA5A5" font-size="10" font-family="Inter,system-ui">Dados estruturados</text>
+</g>
+
+<!-- N5_CV: Conversões -->
+<g class="node" data-tt-t="Conversões e Reativações" data-tt-b="Registro de todas as reativações:&#10;• Qual linha foi reativada&#10;• Volume R$ recuperado&#10;• Período de reativação&#10;• Win-rate por representante">
+  <rect x="1157" y="972" width="170" height="56" rx="8" fill="#0A1F14" stroke="#16A34A" stroke-width="1.2"/>
+  <text x="1242" y="993" text-anchor="middle" fill="#D1FAE5" font-size="11" font-weight="700" font-family="Inter,system-ui">Conversões</text>
+  <text x="1242" y="1009" text-anchor="middle" fill="#86EFAC" font-size="10" font-family="Inter,system-ui">Reativações de Mix</text>
+</g>
+
+<!-- N5_AG: Análises Gestão -->
+<g class="node" data-tt-t="Análises Futuras da Gestão" data-tt-b="Painel consolidado:&#10;• Win-rate por representante / região&#10;• Motivos de perda mais frequentes&#10;• ROI da automação de recuperação&#10;• Alertas de radares negativos">
+  <rect x="1447" y="972" width="170" height="56" rx="8" fill="#1A0D2E" stroke="#7C3AED" stroke-width="1.2"/>
+  <text x="1532" y="993" text-anchor="middle" fill="#E9D5FF" font-size="11" font-weight="700" font-family="Inter,system-ui">Análises da Gestão</text>
+  <text x="1532" y="1009" text-anchor="middle" fill="#C4B5FD" font-size="10" font-family="Inter,system-ui">Futuras & Histórico</text>
+</g>
+
+<!-- Phase mini-labels -->
+<text x="310" y="17" fill="#374151" font-size="9" letter-spacing="0.8" font-family="Inter,system-ui">ANÁLISE AUTOMÁTICA</text>
+<text x="1140" y="17" fill="#374151" font-size="9" letter-spacing="0.8" font-family="Inter,system-ui">ALERTA</text>
+<text x="310" y="367" fill="#374151" font-size="9" letter-spacing="0.8" font-family="Inter,system-ui">ENTRADA — SELEÇÃO POR LOTE</text>
+<text x="660" y="567" fill="#374151" font-size="9" letter-spacing="0.8" font-family="Inter,system-ui">FUNIL CRM — 3 ETAPAS</text>
+<text x="310" y="887" fill="#374151" font-size="9" letter-spacing="0.8" font-family="Inter,system-ui">PERSISTÊNCIA AUDITÁVEL — RETROALIMENTAÇÃO</text>
+
+</svg>
+</div>
+
+<div class="leg">
+  <div class="li"><div class="ll" style="background:#3B82F6"></div> Fluxo principal</div>
+  <div class="li"><div class="ll" style="background:#22C55E"></div> Resultado positivo / Ganhou</div>
+  <div class="li"><div class="ll" style="background:#EF4444"></div> Pendência / Atraso / Perdeu</div>
+  <div class="li"><div class="ll" style="background:#F59E0B"></div> Loop / Reagendamento</div>
+  <div class="li"><div class="ld" style="border-color:#3B82F6"></div> Ação manual do representante</div>
+  <div class="li"><div class="ld" style="border-color:#A78BFA"></div> Leitura/escrita Pasta do Cliente</div>
+  <div class="li"><div class="lr" style="background:#1A0D2E;border:1.5px solid #7C3AED"></div> Motor / Backend</div>
+  <div class="li"><div class="lr" style="background:#071820;border:1.5px solid #0891B2"></div> Notificação</div>
+  <div class="li"><div class="lr" style="background:#0D1D3A;border:1.5px solid #2563EB"></div> KOSMOS / Representante</div>
+  <div class="li"><div class="lr" style="background:#0A1F14;border:1.5px solid #16A34A"></div> Positivo / Ganho</div>
+  <div class="li"><div class="lr" style="background:#1F0D0D;border:1.5px solid #DC2626"></div> Pendência / Negativo</div>
+  <div class="li"><div class="lr" style="background:#1C0E04;border:1.5px solid #D97706"></div> Urgência / Loop</div>
+</div>
+</section>
+
+<!-- DESCRIPTION TAB -->
+<section class="pane" id="pane-desc">
+<div class="dw">
+  <h2>Detalhamento Textual do Fluxo — KOSMOS Recuperação de Mix</h2>
+
+  <div class="sec">
+    <h3 style="color:#8B5CF6">🗄 Camada 1 — Motor de Inteligência & Dados (Backend)</h3>
+    <p><strong>Onde o dado nasce:</strong> Base histórica de vendas 2020–2026, consolidada por CNPJ. A análise ignora trocas de representante — o rep atual enxerga todo o histórico do cliente, independente de quem vendeu antes.</p>
+    <p><strong>O que é analisado:</strong> Compras agrupadas por trimestre (1º, 2º, 3º, 4º), comparando o ano atual contra os 2+ anos anteriores. Linhas monitoradas: <strong>MOLAS</strong> (linha principal), <strong>ARTEFATOS</strong>, <strong>FUNDIDOS</strong> e <strong>GRAMPOS</strong>. Linha <strong>HELICOIDAL totalmente excluída</strong>.</p>
+    <p><strong>Dois gatilhos identificados pelo motor:</strong></p>
+    <ul>
+      <li><strong>Ruptura/Queda de Mix:</strong> Cliente que comprava determinada linha de forma recorrente e parou ou reduziu drasticamente a partir de um mês específico.</li>
+      <li><strong>Oportunidade de Mix:</strong> Cliente ativo que compra apenas MOLAS mas nunca comprou ARTEFATOS, FUNDIDOS ou GRAMPOS — potencial de cross-sell identificado.</li>
+    </ul>
+    <p><strong>Indicador "Dinheiro na Mesa":</strong> Soma em R$ que os clientes sinalizados compravam no período anterior. Exibido como gatilho de urgência no alerta enviado ao representante. Ex: "R$ 48.000 em potencial na mesa".</p>
+  </div>
+
+  <div class="sec">
+    <h3 style="color:#06B6D4">📲 Camada 2 — Notificação Externa (WhatsApp e E-mail)</h3>
+    <p><strong>Papel:</strong> Estritamente informativo. O representante <em>não trata, não responde e não negocia</em> por WhatsApp ou E-mail.</p>
+    <p><strong>Conteúdo do alerta:</strong> Resumo quantitativo (ex: "Você tem 8 clientes com queda de mix e 5 oportunidades — R$ 42.000 em potencial na mesa") + link direto para o KOSMOS com facilitação de login.</p>
+    <p><strong>Fluxo do representante:</strong> Recebe o alerta → clica no link → é direcionado para a Tela do Representante no KOSMOS.</p>
+  </div>
+
+  <div class="sec">
+    <h3 style="color:#3B82F6">📥 Camada 3 — Caixa de Entrada & Gestão de Pendências</h3>
+    <p><strong>Acesso:</strong> Tela filtrada apenas para a carteira do representante logado. Suporta múltiplos acessos por representação.</p>
+    <p><strong>Caixa de Entrada:</strong> Lista todos os clientes sinalizados pelo motor, ordenados por urgência (maior Dinheiro na Mesa primeiro). Clientes pendentes aparecem em vermelho com destaque.</p>
+    <p><strong>Seleção por Lote:</strong> O representante não é obrigado a tratar todos de uma vez. Ele seleciona os clientes que vai trabalhar naquele momento e inicia o funil.</p>
+    <p><strong>Clientes não selecionados:</strong> Continuam na Inbox como "Ações Pendentes" (vermelho), mantendo lembretes futuros até serem puxados para tratativa. Não desaparecem automaticamente.</p>
+  </div>
+
+  <div class="sec">
+    <h3 style="color:#22C55E">🎯 Camada 4 — Funil de Tratativa (3 Etapas)</h3>
+    <p><strong>Etapa 1 — Prospecção / Contato ou Visita:</strong> O sistema já entrega o diagnóstico pronto (quais linhas caíram e em qual mês houve ruptura, histórico 2020-2026 por linha). O representante abre a Pasta do Cliente — otimizada para tablet durante visita presencial — e registra o contato realizado.</p>
+    <p><strong>Etapa 2 — Follow-up / Em Tratativa:</strong> Representante registra o próximo passo com prazo (cotação em 30 dias, visita em 60 dias, negociação em andamento). Se a data vencer sem atualização, o card fica em vermelho como pendência em atraso — ponto negativo no radar do representante.</p>
+    <p><strong>Etapa 3 — Conclusão (obrigatória):</strong> Nenhum card pode ficar aberto indefinidamente. Dois desfechos:</p>
+    <ul>
+      <li><strong>Ganhou:</strong> Cliente fechou pedido / reativou linha. Status positivo gravado na Pasta do Cliente.</li>
+      <li><strong>Perdeu:</strong> Registro obrigatório de motivo estruturado (Concorrência, Preço, Frete/Prazo, Parou com linha). Se o cliente cotará no próximo período, o representante conclui e já abre uma nova pendência futura com data definida, que volta para a Inbox.</li>
+    </ul>
+  </div>
+
+  <div class="sec">
+    <h3 style="color:#A78BFA">📁 Camada 5 — Pasta do Cliente & Retroalimentação</h3>
+    <p>Todas as interações, motivos de perda, agendamentos e conversões ficam permanentemente salvos na Pasta do Cliente (histórico auditável por CNPJ). Alimenta análises futuras da gestão e garante que um novo representante nunca perca contexto sobre o cliente.</p>
+  </div>
+
+  <div class="sec">
+    <h3 style="color:#E6EDF3">📊 Estados Possíveis de um Card/Cliente no Sistema</h3>
+    <table class="st">
+      <thead><tr><th>Estado</th><th>Descrição</th><th>Visual</th><th>Próxima ação</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Pendente</strong></td><td>Sinalizado pelo motor, aguardando o representante puxar para tratativa</td><td>🔴 Vermelho na Inbox</td><td>Representante seleciona e inicia Etapa 1</td></tr>
+        <tr><td><strong>Em Contato/Visita</strong></td><td>Etapa 1 em andamento — representante fez o contato inicial</td><td>🟣 Roxo / Azul</td><td>Avança para Etapa 2 ou conclui</td></tr>
+        <tr><td><strong>Em Follow-up</strong></td><td>Etapa 2 — negociação ativa com prazo definido</td><td>🔵 Azul com data</td><td>Atualizar ou avançar para Etapa 3</td></tr>
+        <tr><td><strong>Atrasado (SLA)</strong></td><td>Prazo da Etapa 2 venceu sem atualização</td><td>🔴 Vermelho piscando</td><td>Urgente: atualizar ou concluir</td></tr>
+        <tr><td><strong>Ganho</strong></td><td>Cliente fechou pedido / reativou linha</td><td>✅ Verde</td><td>Dados salvos na Pasta do Cliente</td></tr>
+        <tr><td><strong>Perdido</strong></td><td>Ciclo encerrado sem conversão — motivo registrado</td><td>❌ Cinza/Vermelho</td><td>Reagendar futuro ou arquivar</td></tr>
+        <tr><td><strong>Reagendado</strong></td><td>Perdido agora, com data futura definida</td><td>🟠 Laranja com data</td><td>Volta para Inbox na data definida</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h3 style="color:#E6EDF3">⚙ Regras de Negócio das Transições</h3>
+    <ul>
+      <li><strong>Etapa 1 → Etapa 2:</strong> Rep registra contato realizado e define próximo passo com prazo.</li>
+      <li><strong>Etapa 2 → Etapa 3:</strong> Rep registra resultado final (Ganhou ou Perdeu) com motivo estruturado.</li>
+      <li><strong>Etapa 2 → Atrasado:</strong> Automático — sistema detecta prazo vencido sem atualização.</li>
+      <li><strong>Perdido → Reagendado:</strong> Rep conclui "Perdeu agora" e cria nova pendência futura com data definida.</li>
+      <li><strong>Reagendado → Inbox:</strong> Na data definida, o card retorna automaticamente com marcação "Reagendamento".</li>
+      <li><strong>Helicoidal:</strong> Linha totalmente excluída de todos os gatilhos, alertas e análises deste fluxo.</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<div class="tt" id="tt"><div class="tt-t" id="tt-t"></div><div class="tt-b" id="tt-b"></div></div>
+
+<script>
+function sw(id,btn){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('pane-'+id).classList.add('on');
+  btn.classList.add('on');
+}
+var tt=document.getElementById('tt'),ttt=document.getElementById('tt-t'),ttb=document.getElementById('tt-b');
+document.querySelectorAll('[data-tt-t]').forEach(function(el){
+  el.addEventListener('mouseenter',function(){
+    ttt.textContent=el.getAttribute('data-tt-t');
+    ttb.textContent=el.getAttribute('data-tt-b').replace(/&#10;/g,'\n');
+    tt.classList.add('show');
+  });
+  el.addEventListener('mousemove',function(e){
+    var x=e.clientX+14,y=e.clientY+14;
+    if(x+300>window.innerWidth)x=e.clientX-310;
+    if(y+170>window.innerHeight)y=e.clientY-180;
+    tt.style.left=x+'px';tt.style.top=y+'px';
+  });
+  el.addEventListener('mouseleave',function(){tt.classList.remove('show');});
+});
+</script>
+</body>
+</html>
