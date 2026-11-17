@@ -386,20 +386,22 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 </g>
 
 <!-- N4_LST: PERDEU -->
-<g class="node" data-tt-t="❌ PERDEU: Registro de Motivo" data-tt-b="Registro OBRIGATÓRIO de motivo:&#10;• Concorrência / contrato fechado&#10;• Não deu preço (margem inadequada)&#10;• Problema frete / prazo de entrega&#10;• Cliente parou de trabalhar com a linha">
+<g class="node" data-tt-t="❌ PERDEU: Formulário de Motivo Obrigatório" data-tt-b="Modal BLOQUEANTE — card só fecha com motivo.&#10;Rep seleciona 1 de 13 motivos padronizados.&#10;Detalhamento condicional aparece por motivo.&#10;Vincula às linhas/produtos da negociação.&#10;⚠ Motivo 13: regra especial de CNPJ (ver nota).">
   <rect x="1582" y="689" width="180" height="52" rx="8" fill="#1F0D0D" stroke="#DC2626" stroke-width="2"/>
   <text x="1672" y="711" text-anchor="middle" fill="#FEE2E2" font-size="12" font-weight="800" font-family="Inter,system-ui">❌ PERDEU</text>
   <text x="1672" y="729" text-anchor="middle" fill="#FCA5A5" font-size="10.5" font-family="Inter,system-ui">Registra motivo (obrigatório)</text>
 </g>
 
-<!-- N4_LST_MOT: Motivos note -->
-<g data-tt-t="Motivos de Perda Estruturados" data-tt-b="Dropdown pré-definido (sem campo livre):&#10;• Concorrência / contrato fechado&#10;• Não deu preço / margem&#10;• Problema frete / prazo de entrega&#10;• Cliente parou de trabalhar com a linha">
-  <rect x="1586" y="770" width="175" height="82" rx="7" fill="#120808" stroke="#7F1D1D" stroke-width="1" stroke-dasharray="5,3"/>
-  <text x="1673" y="788" text-anchor="middle" fill="#FCA5A5" font-size="10.5" font-weight="700" font-family="Inter,system-ui">Motivos estruturados:</text>
-  <text x="1673" y="803" text-anchor="middle" fill="#EF4444" font-size="10" font-family="Inter,system-ui">• Concorrência</text>
-  <text x="1673" y="817" text-anchor="middle" fill="#EF4444" font-size="10" font-family="Inter,system-ui">• Não deu preço</text>
-  <text x="1673" y="831" text-anchor="middle" fill="#EF4444" font-size="10" font-family="Inter,system-ui">• Frete / Prazo</text>
-  <text x="1673" y="845" text-anchor="middle" fill="#EF4444" font-size="10" font-family="Inter,system-ui">• Parou com linha</text>
+<!-- N4_LST_MOT: 13 Motivos Padronizados - formulário obrigatório -->
+<g data-tt-t="📋 13 Motivos Padronizados — Formulário Obrigatório" data-tt-b="Dropdown obrigatório (1 de 13) + detalhamento condicional:&#10;1. Concorrência c/ preço menor (informar % e concorrente)&#10;2. Demora no envio da proposta&#10;3. Cliente fora do perfil de atendimento&#10;4. Prazo de entrega incompatível (prazo solicitado vs ofertado)&#10;5. Concorrência com venda sem nota fiscal&#10;6. Restrição financeira / recusa de pagamento antecipado&#10;7. Recusa do frete FOB&#10;8. Somente pesquisa / atualização de preços&#10;9. Falta de estoque na DF (informar itens e linhas)&#10;10. Sem retorno após acompanhamento (registrar tentativas)&#10;11. Venda casada / compra condicionada&#10;12. Empresa encerrou as atividades&#10;13. Compra por outra razão social ⚠ ver regra especial">
+  <rect x="1586" y="770" width="175" height="102" rx="7" fill="#120808" stroke="#7F1D1D" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="1673" y="787" text-anchor="middle" fill="#FCA5A5" font-size="10.5" font-weight="700" font-family="Inter,system-ui">📋 13 Motivos Padronizados</text>
+  <text x="1673" y="801" text-anchor="middle" fill="#9CA3AF" font-size="9.5" font-family="Inter,system-ui">Formulário obrigatório ao PERDEU</text>
+  <text x="1673" y="816" text-anchor="middle" fill="#EF4444" font-size="9.5" font-family="Inter,system-ui">• Concorrência (preço / nota fiscal)</text>
+  <text x="1673" y="829" text-anchor="middle" fill="#EF4444" font-size="9.5" font-family="Inter,system-ui">• Operacional (frete / prazo / estoque)</text>
+  <text x="1673" y="842" text-anchor="middle" fill="#EF4444" font-size="9.5" font-family="Inter,system-ui">• Comportamento (pesquisa / sem retorno)</text>
+  <text x="1673" y="855" text-anchor="middle" fill="#EF4444" font-size="9.5" font-family="Inter,system-ui">• Situação do cliente (encerrou / perfil)</text>
+  <text x="1673" y="868" text-anchor="middle" fill="#F59E0B" font-size="9.5" font-weight="700" font-family="Inter,system-ui">⚠ Item 13: verificar CNPJ Fama/DF</text>
 </g>
 
 <!-- N4_RGD: Loop Reagendamento -->
@@ -429,7 +431,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 </g>
 
 <!-- N5_MP: Motivos Perda -->
-<g class="node" data-tt-t="Motivos de Perda — Dados Estruturados" data-tt-b="Base estratégica de motivos de perda.&#10;Usada para: análise de concorrência,&#10;ajuste de preços, decisões de frete/prazo,&#10;relatórios gerenciais.">
+<g class="node" data-tt-t="Motivos de Perda — Dados Estruturados" data-tt-b="13 categorias padronizadas gravadas por CNPJ.&#10;Relatórios por: motivo · período · representante&#10;· suporte · cliente · linha de produto.&#10;⚠ Motivo 13 (outra R.Social dentro da Fama/DF):&#10;→ Vincula ao CNPJ correto, NÃO conta como perda comercial.">
   <rect x="887" y="972" width="170" height="56" rx="8" fill="#1F0D0D" stroke="#DC2626" stroke-width="1.2"/>
   <text x="972" y="993" text-anchor="middle" fill="#FEE2E2" font-size="11" font-weight="700" font-family="Inter,system-ui">Motivos de Perda</text>
   <text x="972" y="1009" text-anchor="middle" fill="#FCA5A5" font-size="10" font-family="Inter,system-ui">Dados estruturados</text>
@@ -514,7 +516,24 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
     <p><strong>Etapa 3 — Conclusão (obrigatória):</strong> Nenhum card pode ficar aberto indefinidamente. Dois desfechos:</p>
     <ul>
       <li><strong>Ganhou:</strong> Cliente fechou pedido / reativou linha. Status positivo gravado na Pasta do Cliente.</li>
-      <li><strong>Perdeu:</strong> Registro obrigatório de motivo estruturado (Concorrência, Preço, Frete/Prazo, Parou com linha). Se o cliente cotará no próximo período, o representante conclui e já abre uma nova pendência futura com data definida, que volta para a Inbox.</li>
+      <li><strong>Perdeu:</strong> Modal bloqueante — o card só fecha com motivo registrado. O representante seleciona 1 de <strong>13 motivos padronizados</strong> (definidos pela equipe comercial Fama) e preenche o detalhamento condicional exigido por aquele motivo:
+        <ul style="margin-top:6px">
+          <li>Motivo 1 · <em>Concorrência com preço menor</em> — informar concorrente e diferença percentual</li>
+          <li>Motivo 2 · <em>Demora no envio da proposta</em> — registrar o que causou o atraso</li>
+          <li>Motivo 3 · <em>Cliente fora do perfil</em> — informar situação (ramo, consumidor final, linha leve…)</li>
+          <li>Motivo 4 · <em>Prazo de entrega incompatível</em> — prazo solicitado vs. prazo ofertado</li>
+          <li>Motivo 5 · <em>Concorrência com venda sem nota fiscal</em> — registrar conforme relato</li>
+          <li>Motivo 6 · <em>Restrição financeira / recusa de pagamento antecipado</em> — condição oferecida e motivo da recusa</li>
+          <li>Motivo 7 · <em>Recusa do frete FOB</em> — informar a objeção do cliente</li>
+          <li>Motivo 8 · <em>Somente pesquisa / atualização de preços</em> — sem intenção de compra no momento</li>
+          <li>Motivo 9 · <em>Falta de estoque na DF</em> — informar itens e linhas indisponíveis</li>
+          <li>Motivo 10 · <em>Sem retorno após acompanhamento</em> — registrar tentativas de contato e data do último</li>
+          <li>Motivo 11 · <em>Venda casada / compra condicionada</em> — descrever produtos/condições que impediram o fechamento</li>
+          <li>Motivo 12 · <em>Empresa encerrou as atividades</em> — confirmado pelo proprietário/responsável</li>
+          <li>Motivo 13 · <em>Compra por outra razão social</em> — ⚠ <strong>regra especial:</strong> se o CNPJ identificado pertencer à Fama/DF, o sistema vincula ao cadastro correto e <strong>não contabiliza como perda comercial</strong></li>
+        </ul>
+        Se o cliente cotará no próximo período, o representante conclui e já abre uma nova pendência futura com data definida, que volta para a Inbox.
+      </li>
     </ul>
   </div>
 
@@ -547,6 +566,8 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
       <li><strong>Etapa 2 → Atrasado:</strong> Automático — sistema detecta prazo vencido sem atualização.</li>
       <li><strong>Perdido → Reagendado:</strong> Rep conclui "Perdeu agora" e cria nova pendência futura com data definida.</li>
       <li><strong>Reagendado → Inbox:</strong> Na data definida, o card retorna automaticamente com marcação "Reagendamento".</li>
+      <li><strong>Perdido → Motivo (obrigatório):</strong> Modal bloqueante com 13 opções. Detalhamento condicional exigido nos motivos que precisam de explicação (1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13). Dados gravados: <code>motivo_id</code>, <code>detalhamento</code>, <code>negociacao_id</code>, <code>linhas_envolvidas</code>.</li>
+      <li><strong>Motivo 13 — Compra por outra razão social:</strong> Se o CNPJ informado pertencer à Fama/DF → sistema vincula ao cadastro correto e <strong>não contabiliza como perda comercial</strong>. Se for externo → fluxo normal de perda.</li>
       <li><strong>Helicoidal:</strong> Linha totalmente excluída de todos os gatilhos, alertas e análises deste fluxo.</li>
     </ul>
   </div>
